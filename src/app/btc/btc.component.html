@@ -1,0 +1,29 @@
+<app-loader></app-loader>
+<p class="head">Market Prices and exchanges rates</p>
+<button *ngIf="loaddata" class="btn" mat-raised-button color="primary" (click)="loadData()">Load Data</button>
+<button *ngIf="!loaddata" class="btn" mat-raised-button color="primary" (click)="loadData()">Refresh Data</button>
+<div style="display: flex; justify-content: center;" *ngIf="!loaddata">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for BitCoin">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOption" (page)="getServerData($event)" aria-label="Select page">
+    </mat-paginator>
+</div>
+<table id="customers" *ngIf="!loaddata" class="mat-elevation-z8">
+    <tr>
+        <th>Currency</th>
+        <th>15 minutes delayed market price</th>
+        <th>Last price</th>
+        <th>Buy</th>
+        <th>Sell</th>
+        <th>Currency to BTC</th>
+    </tr>
+
+    <tr *ngFor="let element of dataSource | filter:searchText">
+        <td>{{element['symbol']}}</td>
+        <td>{{element['15m']}}</td>
+        <td>{{element['last']}}</td>
+        <td>{{element['buy']}}</td>
+        <td>{{element['sell']}}</td>
+        <td><button mat-raised-button color="primary" (click)="openDialog(element['symbol'],'3000ms', '1500ms')">Convert</button></td>
+    </tr>
+</table>

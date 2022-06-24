@@ -1,0 +1,72 @@
+<app-loader></app-loader>
+<p class="head">Bitcoin (historical data)</p>
+<button *ngIf="loaddata" class="btn" mat-raised-button color="primary" (click)="loadUsers()">Load Data</button>
+<!-- <mat-paginator *ngIf="!loaddata" [length]="length"
+              [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
+              [pageSizeOptions]="pageSizeOption"
+              (page)="getServerData($event)"
+              aria-label="Select page">
+</mat-paginator> -->
+<div style="display: flex; justify-content: center;" *ngIf="!loaddata">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for BitCoin">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOption" (page)="getServerData($event)" aria-label="Select page">
+    </mat-paginator>
+</div>
+<!-- <table *ngIf="dataSource" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Open">
+        <th mat-header-cell *matHeaderCellDef> Open </th>
+        <td mat-cell *matCellDef="let element"> {{element.Open}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="High">
+        <th mat-header-cell *matHeaderCellDef> High </th>
+        <td mat-cell *matCellDef="let element"> {{element.High}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ChangePercentFromLastMonth">
+        <th mat-header-cell *matHeaderCellDef> ChangePercentFromLastMonth </th>
+        <td mat-cell *matCellDef="let element"> {{element.ChangePercentFromLastMonth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Volume">
+        <th mat-header-cell *matHeaderCellDef> Volume </th>
+        <td mat-cell *matCellDef="let element"> {{element.Volume}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
+
+<table id="customers" *ngIf="!loaddata" class="mat-elevation-z8">
+    <tr>
+      <th mat-sort-header="Date" [class.active] = "head === 'Date'" (click)="sortData('Date')">Date</th>
+      <th mat-sort-header="Price" [class.active] = "head === 'Price'" (click)="sortData('Price')">Price</th>
+      <th mat-sort-header="Open" [class.active] = "head === 'Open'" (click)="sortData('Open')">Open</th>
+      <th mat-sort-header="High" [class.active] = "head === 'High'" (click)="sortData('High')">High</th>
+      <th mat-sort-header="ChangePercentFromLastMonth" [class.active] = "head === 'ChangePercentFromLastMonth'" (click)="sortData('ChangePercentFromLastMonth')">ChangePercentFromLastMonth</th>
+      <th mat-sort-header="Volume" [class.active] = "head === 'Volume'" (click)="sortData('Volume')">Volume</th>
+    </tr>
+  
+    <tr *ngFor="let element of dataSource | filter:searchText">
+      <td>{{element.Date}}</td>
+      <td>{{element.Price}}</td>
+      <td>{{element.Open}}</td>
+      <td>{{element.High}}</td>
+      <td>{{element.ChangePercentFromLastMonth}}</td>
+      <td>{{element.Volume}}</td>
+    </tr>
+  </table>
+  

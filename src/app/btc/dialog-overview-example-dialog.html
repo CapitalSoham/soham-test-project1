@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{data.name}} exchange to BTC</h1>
+<div mat-dialog-content>
+  <input type="number" placeholder="Enter your ammount" [(ngModel)]="searchValue">
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <p *ngIf="isconvert">Result = {{value}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onCheckClick()">Check</button>
+  <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
+</div>

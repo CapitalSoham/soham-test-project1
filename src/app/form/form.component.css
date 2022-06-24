@@ -1,0 +1,26 @@
+p {
+    font-family: Lato;
+  }
+  
+  #root {
+    padding: 30px;
+  }
+  
+  .register-form {
+    max-width: 350px;
+    margin: auto;
+  }
+  .pass{
+    position: absolute;
+    margin-left: 320px;
+    margin-top: 12px;
+    width: 10px;
+  }
+
+  .head{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
