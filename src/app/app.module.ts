@@ -19,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormComponent } from './form/form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CalculatorComponent } from './calculator/calculator.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CalculatorComponent } from './calculator/calculator.component';
     FormsModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent],

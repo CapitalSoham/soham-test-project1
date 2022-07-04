@@ -1,6 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Validation from '../utils/validation';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -11,7 +13,7 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   showPassword = false;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public http: HttpClient, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -53,15 +55,33 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    else {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        })
+      };
+      this.http.post('http://localhost:3000/register', this.form.value, httpOptions).subscribe((res: any) => {
+        console.log(res);
+    this.submitted = false;
+        
+        this.form.reset();
+        this.snackBar.open(res.message, 'Close', {
+          duration: 4000,
+        });
+      });
+    }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
   }
 
   onReset(): void {
     this.submitted = false;
     this.form.reset();
   }
-  eyefunc(){
+  eyefunc() {
     console.log("eye");
     this.showPassword = !this.showPassword;
 
